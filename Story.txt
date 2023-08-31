@@ -1,2 +1,3 @@
-- Schachspiel
-- Escape Room
+- Hackergame 
+- entscheidungen für gute oder böse seite
+- spieler fängt bei fbi an und kann dort bleiben und versuchen befördet zu werden (seine eigene "firma" aufzumachen?) oder nutz seine macht aus (um mehr geld von mafias zu bekommen in dem der spieler banken hackt?)
