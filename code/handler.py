@@ -1,4 +1,5 @@
 import sys
+import threading
 sys.path.append("/data")
 
 import variables as v
@@ -39,15 +40,25 @@ def readAnswer():
 
 def openWindow():
 
+    print("opening Window")
+
+    global frame
+
     frame = tk.Tk()
 
-    frame.geometry("200x100")
     frame.title("controlls")
+    frame.resizable(False, False)
 
-    startButton = tk.Button(frame, text = "Start game", command = startGame("new"))
+    startButton = tk.Button(frame, text = "Start game", command = lambda: startGame("new"))
+    startButton.pack()
     files = listdir("saves")
     for f in files:
-        tk.Button(frame, text = "slot" + str(f), command = startGame(f))
+        button = tk.Button(frame, text = "slot " + str(f), command = lambda f=f: startGame(f))
+        button.pack()
+
+    print("mainloop")
+    frame.protocol("WM_DELETE_WINDOW", saveGame)
+    frame.mainloop()
 
 
 def startGame(saveslot):
@@ -76,9 +87,12 @@ def startGame(saveslot):
             except json.JSONDecodeError:
                 saveError(saveslot, save, "saveslot was empty or currupted")
 
+def onWindowClose():
+    frame.destroy()
+    saveGame()
 
 def saveGame():
-    with open("saves/" + str(date.today()) + " " + str(hours) + ":" + str(minutes), "w") as f:
+    with open("saves/" + str(date.today()) + " " + str(hours) + ":" + str(minutes) + ".json", "w") as f:
         f.write(json.dumps(v.data))
 
 
@@ -95,3 +109,8 @@ def saveError(saveslot, save, error):
         writeContent("restarting")
         remove("saves/" + saveslot)
         openWindow()
+
+print("handler")
+
+windowThread = threading.Thread(target=openWindow)
+windowThread.start()
