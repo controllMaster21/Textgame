@@ -1,20 +1,5 @@
 <html>
     <head>
-        <style>
-            .card {
-                margin: 5px;
-                background-color: #101925;
-                border: 2px solid black;
-                border-radius: 20px;
-                width: 200px;
-                height: 200px;
-                text-align: center;
-                padding: 50px 0;
-                overflow: scroll scroll;
-                display: inline-block;
-                white-space: nowrap;
-            }
-        </style>
     </head>
     <body>
         <div style="text-align: center;">
