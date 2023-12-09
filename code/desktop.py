@@ -8,6 +8,8 @@ height = frame.winfo_screenheight()
 
 aspRatio = Fraction(width, height)
 
+frame.wm_aspect(aspRatio.as_integer_ratio,aspRatio.as_integer_ratio)
+
 frame.title("Hackergame")
 frame.geometry("1080x0+0+0")
 frame.mainloop()
